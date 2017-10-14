@@ -1,0 +1,22 @@
+{
+    "applications": {
+        "gecko": {
+            "id": "tst-middleclick@alexendris.com",
+            "strict_min_version": "57.0a1"
+        }
+    },
+
+    "manifest_version": 2,
+    "name": "TST-MiddleClick",
+    "version": "1.0",
+    
+    "description": "Extends TreeStyleTab to middle click reopen closed tabs",
+
+    "background": {
+        "scripts": ["middleClick.js"]
+    },
+
+    "permissions": [
+        "sessions"
+    ]
+}
