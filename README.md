@@ -1,2 +1,2 @@
 # tst-middleclick
-Add-on to https://github.com/piroor/treestyletab/ to allow reopening of closed tabs through a middle click
+This is a very simple add on to [TreeStyleTabs](https://github.com/piroor/treestyletab/) Firefox addon to enable reopening of tabs through a middle click on the sidebar.
