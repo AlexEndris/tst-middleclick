@@ -1,10 +1,12 @@
 const treeStyleTabId = 'treestyletab@piro.sakura.ne.jp';
 
 async function registerToTST() {
+    var self = await browser.management.getSelf();
+
     console.log("Registering with TST");
     var success = await browser.runtime.sendMessage(treeStyleTabId, {
         type: 'register-self',
-        name: browser.i18n.getMessage('extensionName')
+        name: self.id
     });
 
     console.log("Registered: " + success);
