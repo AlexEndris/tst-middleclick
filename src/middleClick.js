@@ -10,6 +10,9 @@ async function registerToTST() {
     });
 
     console.log("Registered: " + success);
+
+    if (success)
+        clearInterval(registrationTimer);
 }
 
 async function middleclickHandler(message) {
@@ -39,5 +42,4 @@ browser.runtime.onMessageExternal.addListener(async (message, sender) => {
     }
 });
 
-// Register on install
-registerToTST();
+var registrationTimer = setInterval(registerToTST, 2000);
