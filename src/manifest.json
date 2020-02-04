@@ -8,7 +8,7 @@
 
     "manifest_version": 2,
     "name": "TST-MiddleClick",
-    "version": "1.0.2",
+    "version": "1.1.0",
     
     "description": "Extends TreeStyleTab to middle click reopen closed tabs",
 
@@ -16,7 +16,14 @@
         "scripts": ["middleClick.js"]
     },
 
+	"options_ui": {
+		"page": "options.html",
+		"browser_style": true
+	},
+
     "permissions": [
-        "sessions"
+        "sessions",
+		"tabs",
+		"storage"
     ]
 }
