@@ -15,17 +15,44 @@ async function registerToTST() {
         clearInterval(registrationTimer);
 }
 
+
 async function middleclickHandler(message) {
+    async function closeActiveTabs() {
+        let activeTabs = await browser.tabs.query({ active: true });
+
+        for (let tab of activeTabs) {
+            browser.tabs.remove(tab.id);
+        }
+    }
+
+    async function restorePreviousTab() {
+        let sessions = await browser.sessions.getRecentlyClosed({ maxResults: 1 });
+        if (sessions.length && sessions[0].tab)
+            browser.sessions.restore(sessions[0].tab.sessionId);
+    }
+
     if (!message.isMiddleClick)
         return false;
     
     console.log("MiddleClick");
-        
-    let sessions = await browser.sessions.getRecentlyClosed({ maxResults: 1 });
-    if (sessions.length && sessions[0].tab)
-        browser.sessions.restore(sessions[0].tab.sessionId);
+
+    if (closeActive) {
+        await closeActiveTabs();
+    } else {
+        await restorePreviousTab();
+    }
 
     return true;
+}
+
+function storageOnChanged(changes, areaName) {
+    if (areaName !== 'sync')
+        return;
+
+    if (changes.closeActive) {
+        closeActive = changes.closeActive.newValue || false;
+        console.log("Changed to " + changes.closeActive.newValue);
+    }
 }
 
 // Register on initialize
@@ -42,4 +69,9 @@ browser.runtime.onMessageExternal.addListener(async (message, sender) => {
     }
 });
 
-var registrationTimer = setInterval(registerToTST, 2000);
+let registrationTimer = setInterval(registerToTST, 2000);
+let closeActive = false;
+browser.storage.sync.get('closeActive')
+    .then((res => closeActive = res.closeActive || false));
+
+browser.storage.onChanged.addListener(storageOnChanged);
