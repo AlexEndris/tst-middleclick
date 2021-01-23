@@ -18,7 +18,7 @@ async function registerToTST() {
 
 async function middleclickHandler(message) {
     async function closeActiveTabs() {
-        let activeTabs = await browser.tabs.query({ active: true });
+        let activeTabs = await browser.tabs.query({ active: true, currentWindow: true });
 
         for (let tab of activeTabs) {
             browser.tabs.remove(tab.id);
