@@ -5,9 +5,17 @@
     </head>
     <body>
         <form>
-            <label for="closeActive">Close active tabs instead of restore</label>
-            <input id="closeActive" type="checkbox" >
-            <button type="submit">Save</button>
+            <div>
+                <label for="closeActive">Close active tabs instead of restore</label>
+                <input id="closeActive" type="checkbox" >
+            </div>
+            <div>
+                <label for="restoreGloballyRecent">Restore the recently closed tab across all open windows</label>
+                <input id="restoreGloballyRecent" type="checkbox" >
+            </div>
+            <div>
+                <button type="submit">Save</button>
+            </div>
         </form>
         <script src="options.js"></script>
     </body>
